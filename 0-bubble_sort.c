@@ -29,8 +29,8 @@ void bubble_sort(int *array, size_t size)
 			if (*q > *(q + 1))
 			{
 				swap(q, q + 1);
+				print_array(array, size);
 			}
 		}
 	}
-	print_array(array, size);
 }
