@@ -28,12 +28,11 @@ void swapper(listint_t **list, listint_t *pre, listint_t *cur)
  */
 void insertion_sort_list(listint_t **list)
 {
-    if (!list || !*list)
-        return;
-
     listint_t *scanner, *cur, *tmp;
     int tmp_int;
-
+    
+    if (!list || !*list)
+        return;
     scanner = tmp = (*list)->next;
 
     while (scanner)
