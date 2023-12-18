@@ -5,8 +5,8 @@
  * using the selection sort algorithm.
  * @array: An array of integers.
  * @size: The size of the array.
- *
- * Description: Prints the array after each swap.
+ * 
+ * Return: void
  */
 void selection_sort(int *array, size_t size)
 {
@@ -18,7 +18,10 @@ void selection_sort(int *array, size_t size)
             if(array[j] < array [k])
                 k = j;
         }
-        swap(array[i], array[k]);
-        print_array(array, size);
+        if (k != i)
+        {
+            swap(&array[k], &array[i]);
+            print_array(array, size);
+        }
     }
 }
