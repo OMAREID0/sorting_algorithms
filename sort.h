@@ -23,4 +23,5 @@ void bubble_sort(int *array, size_t size);
 void swap(int *a, int *b);
 void swapper(listint_t **list, listint_t *pre, listint_t *cur);
 void insertion_sort_list(listint_t **list);
+void selection_sort(int *array, size_t size);
 #endif
