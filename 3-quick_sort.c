@@ -1,10 +1,10 @@
 #include "sort.h"
 
 /**
- * swap - Swaps two integers.
- * @a: First integer.
- * @b: Second integer.
- * Return: Void.
+ * swap - swaps two integers
+ * @a: first integer
+ * @b: second integer
+ * Return: void
  */
 void swap(int *a, int *b)
 {
@@ -16,65 +16,69 @@ void swap(int *a, int *b)
 }
 
 /**
- * partitioner - Partitions the array into lesser and greater elements around the pivot.
- * @arr: The array to be partitioned.
- * @low: The beginning of the array.
- * @high: The last element in the array.
- * @size: Size of the array.
+ * lomuto_partition - Lomuto partition scheme for QuickSort
+ * @array: the array to be sorted
+ * @low: the beginning of the array
+ * @high: the last element in the array
+ * @size: size of the array
  *
- * Returns: The pivot index `i + 1`.
+ * Returns: pivot index
  */
-int partitioner(int *arr, int low, int high, size_t size)
+int lomuto_partition(int *array, int low, int high, size_t size)
 {
-    int i, j, pivot;
+    int pivot = array[high];
+    int i = low - 1;
+    int j;
 
-    i = low - 1;
-    pivot = arr[high];
-
-    for (j = low; j <= high - 1; ++j)
+    for (j = low; j <= high - 1; j++)
     {
-        if (arr[j] < pivot)
+        if (array[j] < pivot)
         {
-            swap(&arr[j], &arr[++i]);
-            print_array(arr, size);
+            i++;
+            swap(&array[i], &array[j]);
+            print_array(array, size);
         }
     }
 
-    swap(&arr[i + 1], &arr[high]);
-    print_array(arr, size);
+    swap(&array[i + 1], &array[high]);
+    print_array(array, size);
 
     return (i + 1);
 }
 
 /**
- * lomuto_scheme - Lomuto partition scheme for QuickSort.
- * @arr: The array to be sorted.
- * @low: The beginning of the array.
- * @high: The last element in the array.
- * @size: Size of the array.
+ * lomuto_sort - recursive function to sort the array using Lomuto scheme
+ * @array: the array to be sorted
+ * @low: the beginning of the array
+ * @high: the last element in the array
+ * @size: size of the array
  *
- * Returns: Void.
+ * Returns: void
  */
-void lomuto_scheme(int *arr, int low, int high, size_t size)
+void lomuto_sort(int *array, int low, int high, size_t size)
 {
     int pi;
 
     if (low < high)
     {
-        pi = partitioner(arr, low, high, size);
-        lomuto_scheme(arr, low, pi - 1, size);
-        lomuto_scheme(arr, pi + 1, high, size);
+        pi = lomuto_partition(array, low, high, size);
+        lomuto_sort(array, low, pi - 1, size);
+        lomuto_sort(array, pi + 1, high, size);
     }
 }
 
 /**
- * quick_sort - Sorts an array of integers in ascending order using the Quick sort algorithm.
- * @array: The array to be sorted.
- * @size: Size of the array.
+ * quick_sort - sorts an array of integers in ascending order.
+ * using the Quick sort algorithm (recursively).
+ * @array: the array to be sorted
+ * @size: size of the array
  *
- * Returns: Void.
+ * Returns: void
  */
 void quick_sort(int *array, size_t size)
 {
-    lomuto_scheme(array, 0, size - 1, size);
+    if (array == NULL || size < 2)
+        return;
+
+    lomuto_sort(array, 0, size - 1, size);
 }
