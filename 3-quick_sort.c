@@ -28,12 +28,14 @@ int partitioner(int *arr, int low, int high)
 
 	i = low - 1;
 	pivot = arr[high];
-	for (j = low, j <= high - 1; ++j)
+	for (j = low; j <= high - 1; ++j)
 	{
 		if (arr[j] < pivot)
 			swap(&arr[j], &arr[++i]);
+			print_array(arr, size);
 	}
 	swap(&arr[i + 1], &arr[high]);
+	print_array(arr, size);
 	return (i + 1); /*index of pivot in its end place###*/
 }
 
@@ -44,14 +46,18 @@ int partitioner(int *arr, int low, int high)
  *
  * Returns: void.
  */
-void quick_sort(int *array, size_t size)
+void lomuto_scheme(int *array, int low, int high)
 {
 	int pi;
 
 	if (low < high)
 	{
-		pi = int partitioner(int *arr, 0, size - 1);
-		quicksort(arr, low, pi - 1);
-		quicksort(arr, pi + 1, high);
+		pi = partitioner(int *arr, low, high);
+		lomuto_scheme(arr, low, pi - 1);
+		lomuto_scheme(arr, pi + 1, high);
 	}
+}
+void quick_sort(int *array, size_t size)
+{
+	lomuto_scheme(int *array, 0, size - 1);
 }
