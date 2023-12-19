@@ -35,6 +35,7 @@ int partitioner(int *arr, int low, int high, size_t size)
                 if (arr[j] < pivot)
                 {
                         swap(&arr[j], &arr[++i]);
+			print_array(arr, size);
                 }
         }
         swap(&arr[i + 1], &arr[high]);
