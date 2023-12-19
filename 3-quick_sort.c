@@ -32,7 +32,6 @@ int partitioner(int *arr, int low, int high)
 	{
 		if (arr[j] < pivot)
 			swap(&arr[j], &arr[++i]);
-			print_array(arr, size);
 	}
 	swap(&arr[i + 1], &arr[high]);
 	print_array(arr, size);
@@ -52,7 +51,7 @@ void lomuto_scheme(int *array, int low, int high)
 
 	if (low < high)
 	{
-		pi = partitioner(int *arr, low, high);
+		pi = partitioner(arr, low, high);
 		lomuto_scheme(arr, low, pi - 1);
 		lomuto_scheme(arr, pi + 1, high);
 	}
